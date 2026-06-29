@@ -109,6 +109,14 @@
     font-family:'Manrope',sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;
     color:var(--paper);opacity:.65;margin-top:8px;
   }
+  .age-badge{
+    margin-top:22px;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:'Manrope',sans-serif;font-size:11px;letter-spacing:.1em;
+    color:var(--paper);opacity:.5;
+    border:1px solid rgba(242,239,230,.35);border-radius:3px;
+    padding:4px 10px;
+  }
   .scroll-cue{
     position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
     font-family:'Manrope',sans-serif;font-size:12px;color:var(--line-light);
@@ -237,6 +245,11 @@
     outline:none;border-color:var(--blood);
   }
   .field textarea{resize:vertical;min-height:70px;}
+  .age-warning{
+    display:none;font-family:'Manrope',sans-serif;font-size:13.5px;line-height:1.5;
+    color:var(--blood-deep);
+  }
+  .age-warning.show{display:block;}
   .checks,.radios{display:flex;flex-wrap:wrap;gap:10px;}
   .chip{
     position:relative;
@@ -293,7 +306,7 @@
   footer .footer-head p{margin-top:14px;color:rgba(242,239,230,.6);font-size:15.5px;line-height:1.6;max-width:480px;}
 
   footer .contact-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;
     background:rgba(255,255,255,.12);
     border:1px solid rgba(255,255,255,.12);
     margin-bottom:46px;
@@ -376,6 +389,7 @@
       <div class="nums-row">05<span class="sep">—</span>09.08</div>
       <div class="sub">2026</div>
     </div>
+    <div class="age-badge">16+</div>
   </div>
   <div class="scroll-cue"><span class="stripes sm"><span></span><span></span><span></span></span> листай вниз</div>
 </section>
@@ -433,7 +447,7 @@
 <section class="pricing" id="pricing">
   <div class="wrap">
     <h2 class="reveal">Взнос</h2>
-    <p class="sub reveal">Регистрация считается завершённой только после сдачи средств.<br>Для оплаты свяжись с Лерой, <a href="https://t.me/lisslera" target="_blank">@lisslera</a>, и передай ей взнос</p>
+    <p class="sub reveal">Регистрация считается завершённой только после сдачи средств.<br>Для оплаты свяжись с <a href="https://t.me/lisslera" target="_blank">Лерой</a>, и передай ей взнос</p>
     <div class="cards reveal-stagger reveal">
       <div class="card reveal-item">
         <span class="stripes sm"><span></span><span></span><span></span></span>
@@ -470,7 +484,6 @@
 
 <section class="finance">
   <div class="wrap reveal">
-    <span class="stripes"><span></span><span></span><span></span><span></span></span>
     <div>
       <h3>Финансы — не повод не ехать</h3>
       <p>Если сейчас сумма для тебя неподъёмна — не бойся и не стесняйся сказать об этом. Напиши или позвони Диме (<a href="https://t.me/Dima_pozn" target="_blank">@Dima_pozn</a>, +375 33 670 01 37), и мы найдём решение вместе.</p>
@@ -481,7 +494,7 @@
 <section class="form-section" id="register">
   <div class="wrap">
     <h2 class="reveal">Регистрация</h2>
-    <p class="sub reveal">Заполни форму ниже. После этого напиши Лере в Telegram и передай/переведи взнос — регистрация считается завершённой только после оплаты.</p>
+    <p class="sub reveal">Заполни форму ниже. После этого напиши Лере в Telegram и передай/переведи взнос — <strong>регистрация считается завершённой только после оплаты</strong>.</p>
 
     <form id="regForm" class="reveal">
       <div class="field">
@@ -492,6 +505,7 @@
       <div class="field">
         <label for="birthdate">Дата рождения <span class="req">*</span></label>
         <input type="date" id="birthdate" name="birthdate" required>
+        <div class="age-warning" id="ageWarning"></div>
       </div>
 
       <div class="field">
@@ -528,7 +542,6 @@
           <label class="chip"><input type="radio" name="payment" value="Нужна помощь с оплатой"><span>Нужна помощь с оплатой</span></label>
           <label class="chip"><input type="radio" name="payment" value="Готов поддержать другого участника любой суммой"><span>Готов(а) поддержать другого участника любой суммой</span></label>
         </div>
-        <div class="hint">Если нужна помощь — также можно написать напрямую Диме (@Dima_pozn), это останется между вами.</div>
       </div>
 
       <div class="field">
@@ -555,13 +568,13 @@
 
     <div class="footer-head reveal">
       <div class="eyebrow"><span class="stripes sm"><span></span><span></span><span></span><span></span></span> остались вопросы?</div>
-      <h2>Связь по организационным вопросам</h2>
-      <p>Если у тебя остались любые вопросы — пиши или звони нам, мы будем на связи.</p>
+      <h2>Контакты для связи</h2>
+      <p>Если у тебя остались любые вопросы — не бойся написать или позвонить нам, мы будем на связи.</p>
     </div>
 
     <div class="contact-grid reveal-stagger reveal">
       <div class="contact-card reveal-item">
-        <div class="c-role">Организационные вопросы</div>
+        <div class="c-role">Контактное лицо</div>
         <div class="c-name">Дима</div>
         <div class="c-links">
           <a class="c-link" href="https://t.me/Dima_pozn" target="_blank">
@@ -655,6 +668,35 @@
   const submitBtn = document.getElementById('submitBtn');
   const statusMsg = document.getElementById('statusMsg');
   const successCard = document.getElementById('successCard');
+  const birthdateInput = document.getElementById('birthdate');
+  const ageWarning = document.getElementById('ageWarning');
+
+  // Считает полный возраст на сегодняшний день по дате рождения (формат YYYY-MM-DD)
+  function calculateAge(birthdateStr) {
+    if (!birthdateStr) return null;
+    const birth = new Date(birthdateStr);
+    if (isNaN(birth.getTime())) return null;
+    const today = new Date();
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    return age;
+  }
+
+  function checkAgeLive() {
+    const age = calculateAge(birthdateInput.value);
+    if (age !== null && age < 16) {
+      ageWarning.textContent = 'По разным причинам в нашем кемпе действует ограничение 16+. Ждём тебя в следующий раз 💛';
+      ageWarning.classList.add('show');
+    } else {
+      ageWarning.classList.remove('show');
+      ageWarning.textContent = '';
+    }
+  }
+  birthdateInput.addEventListener('change', checkAgeLive);
+  birthdateInput.addEventListener('input', checkAgeLive);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -662,6 +704,14 @@
     const days = [...form.querySelectorAll('input[name="days"]:checked')].map(c => c.value);
     if (days.length === 0) {
       statusMsg.textContent = 'Отметь хотя бы один день.';
+      statusMsg.className = 'status-msg error';
+      return;
+    }
+
+    // Проверка возраста: регистрация доступна только с 16 лет
+    const age = calculateAge(form.birthdate.value);
+    if (age !== null && age < 16) {
+      statusMsg.textContent = 'По разным причинам в нашем кемпе действует ограничение 16+. Ждём тебя в следующий раз 💛';
       statusMsg.className = 'status-msg error';
       return;
     }
